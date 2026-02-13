@@ -37,6 +37,12 @@ npm run dev
 npm run build
 ```
 
+5. Run tests:
+
+```bash
+npm test
+```
+
 Server runs on port 3000 by default.
 
 ## License
