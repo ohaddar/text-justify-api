@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
 import { justifyText } from "../utils/justification";
+import { authMiddleware } from "../middleware/auth";
 
 const router = Router();
 
-router.post("/", (req: Request, res: Response) => {
+router.post("/", authMiddleware, (req: Request, res: Response) => {
   try {
     const text = req.body as string;
 
