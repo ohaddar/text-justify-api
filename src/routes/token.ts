@@ -9,6 +9,26 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET environment variable is required");
 }
 
+/**
+ * @swagger
+ * /api/token:
+ *   post:
+ *     summary: Get authentication token
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Returns a JWT token
+ *       400:
+ *         description: Bad Request
+ */
 router.post("/", (req, res) => {
   const { email } = req.body;
 

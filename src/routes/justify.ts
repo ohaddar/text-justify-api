@@ -5,6 +5,32 @@ import { rateLimitMiddleware } from "../middleware/rateLimit";
 
 const router = Router();
 
+/**
+ * @swagger
+ * /api/justify:
+ *   post:
+ *     summary: Justify text
+ *     description: Justify text to 80 characters per line. Requires authentication token.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         text/plain:
+ *           schema:
+ *             type: string
+ *     responses:
+ *       200:
+ *         description: Justified text
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *       402:
+ *         description: Payment Required
+ *       500:
+ *         description: Internal Server Error
+ */
 router.post(
   "/",
   authMiddleware,

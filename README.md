@@ -67,6 +67,14 @@ npm test
 
 Server runs on port 3000 by default.
 
+## API Documentation
+
+Interactive API documentation is available via Swagger UI at:
+
+```
+http://localhost:3000/api-docs
+```
+
 ## API Usage
 
 ### 1. Get Authentication Token
