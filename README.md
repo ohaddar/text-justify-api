@@ -76,6 +76,68 @@ curl -X POST http://localhost:3000/api/justify \
   -d "Your text to justify goes here..."
 ```
 
+### Justify Endpoint Responses
+
+**Success (200):**
+
+```
+Content-Type: text/plain
+
+Your justified text with
+lines  wrapped  at  80
+characters per line.
+```
+
+**Bad Request (400):**
+
+```json
+{
+  "error": "Invalid text provided"
+}
+```
+
+This occurs when the request body is empty or contains non-string data.
+
+**Unauthorized (401):**
+
+```json
+{
+  "error": "Authentication required"
+}
+```
+
+This occurs when no Authorization header is provided or the Bearer token is missing.
+
+or
+
+```json
+{
+  "error": "Invalid token"
+}
+```
+
+This occurs when the provided token is expired, malformed, or invalid.
+
+**Payment Required (402):**
+
+```json
+{
+  "error": "Payment Required"
+}
+```
+
+This occurs when you exceed the daily word limit (80,000 words per day per email).
+
+**Internal Server Error (500):**
+
+```json
+{
+  "error": "Internal server error"
+}
+```
+
+This occurs when an unexpected error happens during text processing.
+
 ## License
 
 MIT
