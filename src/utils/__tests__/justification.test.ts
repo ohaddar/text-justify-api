@@ -28,6 +28,25 @@ describe("justifyText", () => {
     expect(result).toContain("world");
     expect(result).toContain("test");
   });
+
+  it("should preserve newlines when input contains multiple lines", () => {
+    const input =
+      "This is the first line.\nThis is the second line.\nThis is the third line.";
+    const result = justifyText(input);
+    const lines = result.split("\n");
+
+    expect(lines.length).toBeGreaterThan(1);
+    expect(result).toContain("\n");
+  });
+
+  it("should handle a single word longer than 80 characters", () => {
+    const veryLongWord = "a".repeat(100);
+    const result = justifyText(veryLongWord);
+    const lines = result.split("\n");
+
+    expect(lines.length).toBeGreaterThan(1);
+    expect(lines[0].length).toBeLessThanOrEqual(80);
+  });
 });
 
 describe("countWords", () => {

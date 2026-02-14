@@ -1,10 +1,43 @@
 export function justifyText(text: string, lineLength: number = 80): string {
-  const words = text.trim().split(/\s+/);
+  // Split by newlines first to preserve them
+  const paragraphs = text.split("\n");
+  const justifiedParagraphs = paragraphs.map((paragraph) =>
+    justifyParagraph(paragraph.trim(), lineLength),
+  );
+  return justifiedParagraphs.join("\n");
+}
+
+function justifyParagraph(text: string, lineLength: number): string {
+  if (!text) return "";
+
+  const words = text.split(/\s+/);
   const justifiedLines: string[] = [];
   let wordsInCurrentLine: string[] = [];
   let charsInCurrentLine = 0;
 
   for (const word of words) {
+    // If word is longer than lineLength, split it
+    if (word.length > lineLength) {
+      // Save current line first if it has words
+      if (wordsInCurrentLine.length > 0) {
+        justifiedLines.push(justifyLine(wordsInCurrentLine, lineLength));
+        wordsInCurrentLine = [];
+        charsInCurrentLine = 0;
+      }
+
+      // Split the long word into chunks
+      let remainingWord = word;
+      while (remainingWord.length > lineLength) {
+        justifiedLines.push(remainingWord.substring(0, lineLength));
+        remainingWord = remainingWord.substring(lineLength);
+      }
+      if (remainingWord.length > 0) {
+        wordsInCurrentLine.push(remainingWord);
+        charsInCurrentLine = remainingWord.length;
+      }
+      continue;
+    }
+
     if (
       charsInCurrentLine + word.length + wordsInCurrentLine.length >
       lineLength
