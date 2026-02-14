@@ -25,19 +25,41 @@ cd text-justify-api
 npm install
 ```
 
-3. Run in development mode:
+3. Configure environment variables:
+
+Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+Then update the variables:
+
+```env
+JWT_SECRET=your-jwt-secret-key-here
+PORT=3000
+NODE_ENV=development
+MAX_WORDS_PER_DAY=80000
+```
+
+- `JWT_SECRET` (required): Secret key for JWT token generation and validation
+- `PORT` (optional): Server port, defaults to 3000
+- `NODE_ENV` (optional): Environment mode (development/production)
+- `MAX_WORDS_PER_DAY` (optional): Daily word limit per user, defaults to 80000
+
+4. Run in development mode:
 
 ```bash
 npm run dev
 ```
 
-4. Build for production:
+5. Build for production:
 
 ```bash
 npm run build
 ```
 
-5. Run tests:
+6. Run tests:
 
 ```bash
 npm test
