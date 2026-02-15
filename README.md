@@ -53,6 +53,8 @@ MAX_WORDS_PER_DAY=80000
 npm run dev
 ```
 
+Server runs on port 3000 by default.
+
 5. Build for production:
 
 ```bash
@@ -65,7 +67,11 @@ npm run build
 npm test
 ```
 
-Server runs on port 3000 by default.
+7. Run tests with coverage:
+
+```bash
+npm test -- --coverage
+```
 
 ## API Documentation
 
