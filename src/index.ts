@@ -5,6 +5,9 @@ import swaggerJsdoc from "swagger-jsdoc";
 import tokenRouter from "./routes/token";
 import justifyRouter from "./routes/justify";
 
+const serverUrl =
+  process.env.RENDER_URL || `http://localhost:${process.env.PORT || 3000}`;
+
 const app = express();
 
 app.use(express.json());
@@ -21,7 +24,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: serverUrl,
       },
     ],
     components: {
@@ -41,9 +44,17 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.get("/", (_req: Request, res: Response) => {
-  res.status(200).json({
-    message: "Welcome to Test API",
-  });
+  res.status(200).send(`
+    <html>
+      <head>
+        <title>Welcome to Test API</title>
+      </head>
+      <body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
+        <h1>Welcome to Test API</h1>
+        <p>Explore the <a href="/api-docs">API Documentation</a></p>
+      </body>
+    </html>
+  `);
 });
 
 app.use("/api/token", tokenRouter);
