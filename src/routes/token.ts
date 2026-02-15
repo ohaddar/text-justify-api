@@ -1,5 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import { isValidEmail } from "../utils/validation";
 
 const router = Router();
 
@@ -34,6 +35,10 @@ router.post("/", (req, res) => {
 
   if (!email) {
     return res.status(400).json({ error: "Email is required" });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: "Invalid email format" });
   }
 
   const token = jwt.sign({ email }, JWT_SECRET, {
